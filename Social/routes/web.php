@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BackEnd\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/home', [\App\Http\Controllers\BackEnd\HomeController::class, 'index'])->name('adminHome');
+Route::group(['namespace' => 'BackEnd', 'prefix' => 'admin'], function() {
+    Route::get('/', [HomeController::class, 'index'])->name('adminHome');
+    Route::get('/users', [\App\Http\Controllers\BackEnd\userController::class, 'index'])->name('users');
+    Route::get('/user/create', [HomeController::class, 'create'])->name('user.create');
+    Route::post('/user/store', [HomeController::class, 'store'])->name('user.store');
+    Route::get('/user/edit/{id}', [HomeController::class, 'edit'])->name('user.edit');
+    Route::post('/user/update/{id}', [HomeController::class, 'update'])->name('user.update');
+
+
+
+
+
+});
