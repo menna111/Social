@@ -76,4 +76,13 @@ class HomeController extends BackEndController
             return $this->returnError('some thing wrong',400);
         }
     }
+
+    public  function delete($id){
+        $user=User::whereId($id)->first();
+        if (is_null($user)){
+            return $this->returnError('there is no user',404);
+        }
+        $user->delete();
+        return $this->returnSuccess('deleted successfully',200);
+    }
 }

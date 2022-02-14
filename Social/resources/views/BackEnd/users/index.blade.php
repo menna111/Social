@@ -51,7 +51,7 @@
                                 <i class="material-icons">edit</i>
                             </button>
 
-                            <button style="border: none" type="button" rel="tooltip" title="" class="btn btn-white btn-link btn-sm " data-original-title="Remove User">
+                            <button onclick="deleteuser({{$user->id}})" style="border: none" type="button" rel="tooltip" title="" class="btn btn-white btn-link btn-sm " data-original-title="Remove User">
                                 <i class="material-icons">close</i>
                             </button>
                         </td>
@@ -111,6 +111,35 @@
             url: `{{url('/admin/user/edit')}}/${id}`,
             success:function (response){
                 $('#content').html(response)
+            }
+
+        } )
+
+    }
+
+    function deleteuser(id){
+
+        $.ajax({
+            type: "GET",
+            url: `{{route('user.delete',$user->id)}}`,
+            success: function(response) {
+                console.log(response)
+                if(response.status == true){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'success',
+                        text: response.msg,
+                    })
+                    window.location.reload()
+                }else{
+                    // alert(response.msg);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'error',
+                        text: response.msg,
+                    })
+                }
+
             }
 
         } )

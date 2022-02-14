@@ -29,6 +29,7 @@ Route::group(['namespace' => 'BackEnd', 'prefix' => 'admin'], function() {
     Route::post('/user/store', [HomeController::class, 'store'])->name('user.store');
     Route::get('/user/edit/{id}', [HomeController::class, 'edit'])->name('user.edit');
     Route::post('/user/update/{id}', [HomeController::class, 'update'])->name('user.update');
+    Route::get('/user/delete/{id}', [HomeController::class, 'delete'])->name('user.delete');
 
 
 
