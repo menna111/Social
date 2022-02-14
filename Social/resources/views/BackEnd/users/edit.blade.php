@@ -62,7 +62,7 @@
 
         $.ajax({
             type: "POST",
-            url: `{{route('user.store')}}`,
+            url: `{{route('user.update',$user->id)}}`,
             data: formData,
             contentType: false,
             processData: false,

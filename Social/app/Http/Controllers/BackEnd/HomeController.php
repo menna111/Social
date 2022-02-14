@@ -58,7 +58,7 @@ class HomeController extends BackEndController
         $request->validate([
 
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,id,'.Auth::id()],
+            'email' => ['required', 'email', 'unique:users,id,'.$user->id],
             'password' => ['required', 'string', 'min:8'],
 
         ]);
@@ -72,7 +72,7 @@ class HomeController extends BackEndController
             return $this->returnSuccess('updated successfully',201);
         }catch (\Exception $exception){
 
-            dd($exception->getMessage());
+            dd($exception->getMessage(), $request->all());
             return $this->returnError('some thing wrong',400);
         }
     }
