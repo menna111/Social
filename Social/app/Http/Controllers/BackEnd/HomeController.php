@@ -55,18 +55,29 @@ class HomeController extends BackEndController
     public function update(Request $request,$id){
 
         $user=User::whereId($id)->first();
+//        dd($user->password);
+
+
+        if ($request['password']){
+            $password=Hash::make($request['password']);
+        }else{
+            $password=$user->password;
+        }
         $request->validate([
 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,id,'.$user->id],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['string', 'min:8'],
 
         ]);
+
+
+
         try {
            $user->update([
                 'name' => $request['name'],
                 'email' => $request['email'],
-                'password' => Hash::make($request['password']),
+                'password' => $password,
             ]);
 
             return $this->returnSuccess('updated successfully',201);

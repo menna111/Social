@@ -1,44 +1,44 @@
 
 <div class="card " >
     <div class="card-header card-header-primary">
-        <h4 class="card-title">Update User</h4>
+        <h4 class="card-title">Add Category</h4>
     </div>
     <div class="card-body">
-        <form id="update">
+        <form id="add">
             @csrf
             <div class="row">
 
                 <div class="col-md-12">
                     <div class="form-group bmd-form-group">
-                        <label >Username</label>
-                        <input type="text" class="form-control"  style="border: none"  name="name" value="{{$user->name}}">
+                        <label >category name</label>
+                        <input type="text" class="form-control"  style="border: none"  name="name">
                     </div>
                 </div>
 
             </div>
-            <div class="row">
+             <div class="row">
 
                 <div class="col-md-12">
                     <div class="form-group bmd-form-group">
-                        <label >Password</label>
-                        <input type="password" class="form-control" style="border: none" name="password" >
+                        <label >meta_keywords</label>
+                        <input type="text" class="form-control" style="border: none" name="meta_keywords">
                     </div>
                 </div>
 
-            </div>
+             </div>
             <div class="row">
 
-                <div class="col-md-12">
+                    <div class="col-md-12">
                     <div class="form-group bmd-form-group">
-                        <label >Email address</label>
-                        <input type="email" class="form-control" style="border: none"  name="email" value="{{$user->email}}">
+                        <label >Meta description</label>
+                        <input type="text" class="form-control" style="border: none"  name="meta_description">
                     </div>
                 </div>
             </div>
 
 
 
-            <button type="submit" class="btn btn-primary pull-right">Update User</button>
+            <button type="submit" class="btn btn-primary pull-right">Add Category</button>
             <div class="clearfix"></div>
         </form>
     </div>
@@ -53,16 +53,17 @@
         }
     });
 
-    $('#update').submit(function (e){
+    $('#add').submit(function (e){
         e.preventDefault();
 
+        console.log('hi');
 
 
         var formData = new FormData(this);
 
         $.ajax({
             type: "POST",
-            url: `{{route('user.update',$user->id)}}`,
+            url: `{{route('category.store')}}`,
             data: formData,
             contentType: false,
             processData: false,
