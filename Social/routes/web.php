@@ -5,6 +5,7 @@ use App\Http\Controllers\BackEnd\HomeController;
 use App\Http\Controllers\Backend\CategoriesController;
 use App\Http\Controllers\Backend\skillsController;
 use App\Http\Controllers\Backend\tagsController;
+use App\Http\Controllers\Backend\pagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['namespace' => 'BackEnd', 'prefix' => 'admin'], function() {
-    Route::get('/', [HomeController::class, 'index'])->name('adminHome');
+    Route::get('/home', [HomeController::class, 'index'])->name('adminHome');
     Route::get('/users', [\App\Http\Controllers\BackEnd\userController::class, 'index'])->name('users');
     Route::get('/user/create', [HomeController::class, 'create'])->name('user.create');
     Route::post('/user/store', [HomeController::class, 'store'])->name('user.store');
@@ -62,5 +62,15 @@ Route::group(['namespace' => 'BackEnd', 'prefix' => 'admin'], function() {
     Route::get('/tag/edit/{id}', [tagsController::class, 'edit'])->name('tag.edit');
     Route::post('/tag/update/{id}', [tagsController::class, 'update'])->name('tag.update');
     Route::get('/tag/delete/{id}', [tagsController::class, 'delete'])->name('tag.delete');
+
+
+    //=========pages========= //
+
+    Route::get('/pages', [pagesController::class,'index'])->name('pages');
+    Route::get('/page/create', [pagesController::class, 'create'])->name('page.create');
+    Route::post('/page/store', [pagesController::class, 'store'])->name('page.store');
+    Route::get('/page/edit/{id}', [pagesController::class, 'edit'])->name('page.edit');
+    Route::post('/page/update/{id}', [pagesController::class, 'update'])->name('page.update');
+    Route::get('/page/delete/{id}', [pagesController::class, 'delete'])->name('page.delete');
 
 });
